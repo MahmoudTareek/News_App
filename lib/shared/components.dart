@@ -2,6 +2,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/cubit/cubit.dart';
+import 'package:news_app/modules/details/detail_screen.dart';
 
 Widget defaultButton({
   required VoidCallback function,
@@ -95,10 +96,22 @@ Future<dynamic> navigateTo(context, widget) =>
 Widget buildArticleItem(article, context) => InkWell(
   onTap: () {
     // navigateTo(context, WebViewScreen(article['url']));
+    var hours = hour(articleTime: article['publishedAt']);
+    navigateTo(
+      context,
+      DetailScreen(
+        articleImageURL:
+            article['urlToImage'] ?? 'https://via.placeholder.com/150',
+        articleTitle: article['title'] ?? 'No Title',
+        articleContent: article['content'] ?? 'No Content',
+        articleSource: article['source']['name'] ?? 'Unknown Source',
+        articlePublishedTime: hours.toString(),
+        articleURL: article['url'] ?? '',
+      ),
+    );
   },
   child: Padding(
     padding: const EdgeInsets.all(20.0),
-
     child: Row(
       children: [
         Container(
@@ -124,17 +137,41 @@ Widget buildArticleItem(article, context) => InkWell(
                   '${article['category'] ?? 'General'}',
                   style: TextStyle(color: Colors.grey),
                 ),
+                SizedBox(height: 5.0),
                 Expanded(
                   child: Text(
                     '${article['title']}',
-                    // style: Theme.of(context).textTheme.bodyText1,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                Text(
-                  '${article['publishedAt']}',
-                  style: TextStyle(color: Colors.grey),
+                Row(
+                  children: [
+                    Text(
+                      '${article['source']['name']}',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 5.0),
+                    Icon(
+                      Icons.access_time_rounded,
+                      size: 14.0,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(width: 3.0),
+                    Text(
+                      '${hour(articleTime: article['publishedAt'])}h ago',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Spacer(),
+                    Icon(Icons.bookmark, size: 20.0, color: Colors.grey),
+                  ],
                 ),
               ],
             ),
@@ -150,9 +187,17 @@ Widget articleBuilder(list, context, {isSearch = false}) => ConditionalBuilder(
   builder: (context) => ListView.separated(
     physics: BouncingScrollPhysics(),
     itemBuilder: (context, index) => buildArticleItem(list[index], context),
-    separatorBuilder: (context, index) => myDivider(),
-    itemCount: 10,
+    separatorBuilder: (context, index) => Container(),
+    itemCount: 30,
   ),
   fallback: (context) =>
       isSearch ? Container() : Center(child: CircularProgressIndicator()),
 );
+
+int hour({required articleTime}) {
+  String publishedAt = articleTime;
+  DateTime publishedTime = DateTime.parse(publishedAt);
+  Duration diff = DateTime.now().difference(publishedTime);
+  int hoursAgo = diff.inHours;
+  return hoursAgo;
+}

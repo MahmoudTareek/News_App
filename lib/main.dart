@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<NewsCubit>(
-          create: (context) => NewsCubit()..getBusiness(),
-        ),
+        BlocProvider<NewsCubit>(create: (context) => NewsCubit()..getAllNews()),
       ],
       child: MaterialApp(debugShowCheckedModeBanner: false, home: NewsLayout()),
     );

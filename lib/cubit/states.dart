@@ -4,14 +4,14 @@ class NewsInitialState extends NewsStates {}
 
 class NewsBottomNavState extends NewsStates {}
 
-class NewsGetBusinessLoadingState extends NewsStates {}
+class NewsGetAllNewsLoadingState extends NewsStates {}
 
-class NewsGetBusinessSuccessState extends NewsStates {}
+class NewsGetAllNewsSuccessState extends NewsStates {}
 
-class NewsGetBusinessErrorState extends NewsStates {
+class NewsGetAllNewsErrorState extends NewsStates {
   late final String error;
 
-  NewsGetBusinessErrorState(this.error);
+  NewsGetAllNewsErrorState(this.error);
 }
 
 class NewsGetSportsLoadingState extends NewsStates {}

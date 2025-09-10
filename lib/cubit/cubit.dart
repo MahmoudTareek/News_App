@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/states.dart';
 import 'package:news_app/modules/bookmarks/bookmarks_screen.dart';
-import 'package:news_app/modules/explore/explore_screen.dart';
 import 'package:news_app/modules/home/home_screen.dart';
 import 'package:news_app/modules/profile/profile_screen.dart';
 import 'package:news_app/modules/search/search_screen.dart';
@@ -46,22 +45,24 @@ class NewsCubit extends Cubit<NewsStates> {
     emit(NewsBottomNavState());
   }
 
-  List<dynamic> business = [];
+  List<dynamic> allNews = [];
 
-  void getBusiness() {
-    emit(NewsGetBusinessLoadingState());
+  void getAllNews() {
+    emit(NewsGetAllNewsLoadingState());
     DioHelper.getData(
           url: 'v2/everything',
           query: {'q': '*', 'apiKey': 'e55351d11831407784ecf1edc1673e7b'},
         )
         .then((value) {
-          business = value.data['articles'];
-          print(business[0]['title']);
-          emit(NewsGetBusinessSuccessState());
+          allNews = value.data['articles'];
+          for (var article in allNews) {
+            print(article['category']);
+          }
+          emit(NewsGetAllNewsSuccessState());
         })
         .catchError((error) {
           print(error.toString());
-          emit(NewsGetBusinessErrorState(error.toString()));
+          emit(NewsGetAllNewsErrorState(error.toString()));
         });
   }
 

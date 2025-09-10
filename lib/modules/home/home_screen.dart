@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<NewsCubit, NewsStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var list = NewsCubit.get(context).business;
+        var list = NewsCubit.get(context).allNews;
         return articleBuilder(list, context);
       },
     );
