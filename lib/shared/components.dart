@@ -1,88 +1,99 @@
+// import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-
-Color maincolor = const Color(0xff3e536e);
-Color favoritesColor = Colors.red;
-Color detailsBackground = const Color(0xfff4f3f6);
+import 'package:news_app/cubit/cubit.dart';
 
 Widget defaultButton({
+  required VoidCallback function,
+  bool isDisabled = false,
   double width = double.infinity,
   Color background = Colors.blue,
-  double raduis = 10.0,
-  double height = 40.0,
-  bool isUpperCase = true,
-  required function,
+  bool isUpperCase = false,
+  double radius = 0.0,
   required String text,
 }) => Container(
   width: width,
-  height: height,
-  // ignore: sort_child_properties_last
   child: MaterialButton(
     onPressed: function,
     child: Text(
       isUpperCase ? text.toUpperCase() : text,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 16.0,
+      ),
     ),
   ),
   decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(raduis),
+    borderRadius: BorderRadius.circular(radius),
     color: background,
   ),
 );
 
-Widget defaultTextButton({
-  required VoidCallback function,
-  required String text,
-}) => TextButton(
-  onPressed: function,
-  child: Text(
-    text.toUpperCase(),
-    style: const TextStyle(fontWeight: FontWeight.bold),
-  ),
-);
-
 Widget defaultFormField({
+  required BuildContext context,
   required TextEditingController controller,
   required TextInputType type,
-  onSubmit,
-  onTab,
-  onChange,
   bool isPassword = false,
-  required validate,
-  required String label,
-  required IconData prefix,
+  Function? onSubmit,
+  Function? onChange,
+  Function? onTap,
+  required Function validate,
+  String? label,
+  IconData? prefix,
   IconData? suffix,
-  suffixPressed,
+  Function? suffixPrssed,
   bool isClickable = true,
 }) => TextFormField(
   controller: controller,
   keyboardType: type,
   obscureText: isPassword,
+  onFieldSubmitted: (s) {
+    onSubmit!(s);
+  },
+  onChanged: (s) {
+    onChange!(s);
+  },
+  onTap: () {
+    onTap!();
+  },
+  validator: (value) => validate(value),
   enabled: isClickable,
-  onFieldSubmitted: onSubmit,
-  onTap: onTab,
-  onChanged: onChange,
-  validator: validate,
   decoration: InputDecoration(
+    labelStyle: TextStyle(color: secondryColor),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: primaryColor),
+    ),
     labelText: label,
     prefixIcon: Icon(prefix),
-    suffixIcon: suffix != null
-        ? IconButton(onPressed: suffixPressed, icon: Icon(suffix))
+    suffix: suffix != null
+        ? IconButton(
+            onPressed: () {
+              // OrdersCubit.get(context).changePasswordVisibility();
+              isPassword = !isPassword;
+              suffixPrssed!();
+            },
+            icon: Icon(suffix),
+          )
         : null,
-    border: const OutlineInputBorder(),
+    border: OutlineInputBorder(),
   ),
-);
-
-void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
-  context,
-  MaterialPageRoute(builder: (context) => widget),
-  (route) => false,
 );
 
 Widget myDivider() => Padding(
   padding: const EdgeInsetsDirectional.only(start: 20.0),
   child: Container(
     width: double.infinity,
-    height: 1.0,
+    height: 2.0,
     color: Colors.grey[300],
   ),
 );
+
+Future<dynamic> navigateTo(context, widget) =>
+    Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
+
+int selectedMeal = 0;
+List<String> selectedMealIds = [];
+
+const Color primaryColor = Colors.deepOrange;
+
+const Color secondryColor = Colors.blue;

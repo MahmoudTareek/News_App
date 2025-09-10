@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/on_boarding_model.dart';
-import 'package:news_app/modules/home/home_screen.dart';
-// import 'package:news_app/shared/components.dart';
+import 'package:news_app/modules/login/login_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -129,7 +128,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       if (isLast) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
                         );
                       } else {
                         boardController.nextPage(
