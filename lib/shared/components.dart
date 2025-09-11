@@ -135,7 +135,7 @@ Widget buildArticleItem(article, context) => InkWell(
                   '${article['category'] ?? 'General'}',
                   style: TextStyle(color: Colors.grey),
                 ),
-                SizedBox(height: 5.0),
+                SizedBox(height: 10.0),
                 Expanded(
                   child: Text(
                     '${article['title']}',
@@ -149,27 +149,33 @@ Widget buildArticleItem(article, context) => InkWell(
                 ),
                 Row(
                   children: [
+                    CircleAvatar(
+                      radius: 8.0,
+                      backgroundImage: Image(
+                        image: AssetImage('assets/images/profile.jpg'),
+                      ).image,
+                    ),
+                    SizedBox(width: 2.0),
                     Expanded(
                       child: Text(
                         '${article['source']['name']}',
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Colors.black45,
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(width: 5.0),
                     Icon(
                       Icons.access_time_rounded,
                       size: 14.0,
-                      color: Colors.grey,
+                      color: Colors.black54,
                     ),
                     SizedBox(width: 3.0),
                     Text(
                       '${hour(articleTime: article['publishedAt'])}h ago',
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.black54),
                     ),
                     Spacer(),
                     Icon(Icons.more_horiz, size: 20.0, color: Colors.grey),
