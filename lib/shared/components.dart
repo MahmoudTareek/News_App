@@ -66,11 +66,10 @@ Widget defaultFormField({
       borderSide: BorderSide(color: Colors.blue),
     ),
     labelText: label,
-    prefixIcon: Icon(prefix),
+    prefixIcon: prefix != null ? Icon(prefix) : null,
     suffix: suffix != null
         ? IconButton(
             onPressed: () {
-              // OrdersCubit.get(context).changePasswordVisibility();
               isPassword = !isPassword;
               suffixPrssed!();
             },

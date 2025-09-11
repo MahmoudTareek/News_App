@@ -131,9 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20.0),
                 defaultButton(
                   function: () {
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => NewsLayout()),
+                      (Route<dynamic> route) => false,
                     );
                   },
                   text: 'Login',
