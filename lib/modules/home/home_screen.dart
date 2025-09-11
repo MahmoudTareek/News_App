@@ -1,6 +1,7 @@
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_app/cubit/cubit.dart';
 import 'package:news_app/cubit/states.dart';
 import 'package:news_app/shared/components.dart';
@@ -24,9 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  @override
   void initState() {
     super.initState();
-    NewsCubit.get(context).getAllNews();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      NewsCubit.get(context).getAllNews();
+    });
   }
 
   @override
@@ -36,6 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         var cubit = NewsCubit.get(context);
         var list = cubit.allNews;
+        if (list.isEmpty) {
+          Fluttertoast.showToast(
+            msg: "No Articles Available.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.yellow,
+            textColor: Colors.black,
+            fontSize: 16.0,
+          );
+        }
         return CustomRefreshIndicator(
           onRefresh: () async {
             if (selectedCategory == 'all') {

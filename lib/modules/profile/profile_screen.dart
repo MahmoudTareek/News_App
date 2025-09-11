@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_app/cubit/cubit.dart';
-import 'package:news_app/modules/login/login_screen.dart';
 import 'package:news_app/modules/onBoarding/on_boarding_screen.dart';
 import 'package:news_app/shared/components.dart';
 
@@ -66,7 +66,17 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: defaultButton(
-                          function: () {},
+                          function: () {
+                            Fluttertoast.showToast(
+                              msg: "Your Information Updated Successfully",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          },
                           text: 'Update',
                           background: Colors.blue,
                           radius: 50.0,

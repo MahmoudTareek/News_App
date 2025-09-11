@@ -1,9 +1,4 @@
-//login screen
-// import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/cubit/cubit.dart';
-import 'package:news_app/cubit/states.dart';
 import 'package:news_app/layout/news_layout.dart';
-import 'package:news_app/modules/home/home_screen.dart';
 import 'package:news_app/shared/components.dart';
 import 'package:flutter/material.dart';
 
@@ -149,59 +144,62 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 15.0),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(150, 50),
-                        padding: EdgeInsets.all(12),
-                        backgroundColor: Colors.grey[300],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(12),
+                          backgroundColor: Colors.grey[300],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            'assets/images/facebook.png',
-                            height: 24,
-                            width: 24,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Facebook',
-                            style: TextStyle(color: Colors.grey[700]),
-                          ),
-                        ],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/facebook.png',
+                              height: 24,
+                              width: 24,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              'Facebook',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(width: 20.0),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(150, 50),
-                        padding: EdgeInsets.all(12),
-                        backgroundColor: Colors.grey[300],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(12),
+                          backgroundColor: Colors.grey[300],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            'assets/images/google.png',
-                            height: 24,
-                            width: 24,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Google',
-                            style: TextStyle(color: Colors.grey[700]),
-                          ),
-                        ],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/google.png',
+                              height: 24,
+                              width: 24,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              'Google',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_app/cubit/states.dart';
 import 'package:news_app/modules/bookmarks/bookmarks_screen.dart';
 import 'package:news_app/modules/home/home_screen.dart';
@@ -52,7 +53,15 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetAllNewsSuccessState());
         })
         .catchError((error) {
-          print(error.toString());
+          Fluttertoast.showToast(
+            msg: "Something went wrong.. Please try again later.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
           emit(NewsGetAllNewsErrorState(error.toString()));
         });
   }
@@ -71,7 +80,15 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetSearchSuccessState());
         })
         .catchError((error) {
-          print(error.toString());
+          Fluttertoast.showToast(
+            msg: "Something went wrong.. Please try again later.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
           emit(NewsGetSearchErrorState(error.toString()));
         });
   }
@@ -91,7 +108,15 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetAllNewsSuccessState());
         })
         .catchError((error) {
-          print(error.toString());
+          Fluttertoast.showToast(
+            msg: "Something went wrong.. Please try again later.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
           emit(NewsGetAllNewsErrorState(error.toString()));
         });
   }

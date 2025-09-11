@@ -1,7 +1,5 @@
-// import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/cubit/cubit.dart';
 import 'package:news_app/modules/details/detail_screen.dart';
 
 Widget defaultButton({
@@ -77,15 +75,6 @@ Widget defaultFormField({
           )
         : null,
     border: OutlineInputBorder(),
-  ),
-);
-
-Widget myDivider() => Padding(
-  padding: const EdgeInsetsDirectional.only(start: 20.0),
-  child: Container(
-    width: double.infinity,
-    height: 2.0,
-    color: Colors.grey[300],
   ),
 );
 
@@ -199,8 +188,9 @@ Widget articleBuilder(list, context, {isSearch = false}) => ConditionalBuilder(
     separatorBuilder: (context, index) => SizedBox(height: 1.0),
     itemCount: list.length,
   ),
-  fallback: (context) =>
-      isSearch ? Container() : Center(child: CircularProgressIndicator()),
+  fallback: (context) => isSearch
+      ? Container()
+      : Center(child: CircularProgressIndicator(color: Colors.blue)),
 );
 
 int hour({required articleTime}) {
