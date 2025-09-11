@@ -1,16 +1,52 @@
-# news_app
+# News Application
 
-A new Flutter project.
+Developed a News Application with a clean architecture using BLoC and News API.
 
-## Getting Started
+## Application Features
 
-This project is a starting point for a Flutter application.
+- Simple UI screens.
 
-A few resources to get you started if this is your first Flutter project:
+- OnBoarding screen.
+  
+- Login.
+  
+- Bottom navigation bar to switch between screens easily.
+  
+- Home screen that contains:
+    
+  Categories Filter.
+  
+  List of News according to the category.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Explore screen that contains searching for articales by keywords
+  
+- Bookmark screen that contains Bookmarked Articles
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Profile screen that contains user's information to be updated and logout button.
+
+- Detail screen that contains article's title, image, description, published date, and a button to navigate to real full article.
+  
+    
+
+## Screenshots
+  
+<p>
+  <img src="assets/Screenshots/1.jpeg" width="250"/>
+  <img src="assets/Screenshots/2.jpeg" width="250"/>
+  <img src="assets/Screenshots/3.jpeg" width="250"/>
+</p>
+
+  
+<p>
+  <img src="assets/Screenshots/4.jpeg" width="250"/>
+  <img src="assets/Screenshots/5.jpeg" width="250"/>
+  <img src="assets/Screenshots/6.jpeg" width="250"/>
+</p>
+
+  
+<p>
+  <img src="assets/Screenshots/7.jpeg" width="250"/>
+  <img src="assets/Screenshots/8.jpeg" width="250"/>
+  <img src="assets/Screenshots/9.jpeg" width="250"/>
+</p3
+3
