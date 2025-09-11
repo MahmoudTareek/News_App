@@ -23,19 +23,46 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(icon: Icon(Icons.share_outlined), onPressed: () {}),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${articleSource}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '${articlePublishedTime}h ago',
-              style: TextStyle(fontSize: 18),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: Image(
+                    image: AssetImage('assets/images/profile.jpg'),
+                  ).image,
+                ),
+                SizedBox(width: 10.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${articleSource}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '${articlePublishedTime}h ago',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ],
             ),
             SizedBox(height: 20),
             Center(
