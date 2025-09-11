@@ -6,9 +6,9 @@ Developed a News Application with a clean architecture using BLoC and News API.
 
 - Simple UI screens.
 
-- OnBoarding screen.
+- OnBoarding screens.
   
-- Login.
+- Login screen.
   
 - Bottom navigation bar to switch between screens easily.
   
