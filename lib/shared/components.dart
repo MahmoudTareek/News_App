@@ -151,11 +151,15 @@ Widget buildArticleItem(article, context) => InkWell(
                 ),
                 Row(
                   children: [
-                    Text(
-                      '${article['source']['name']}',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        '${article['source']['name']}',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     SizedBox(width: 5.0),

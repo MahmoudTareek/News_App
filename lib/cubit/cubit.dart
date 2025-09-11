@@ -132,7 +132,6 @@ class NewsCubit extends Cubit<NewsStates> {
           query: {'q': '$value', 'apiKey': 'e55351d11831407784ecf1edc1673e7b'},
         )
         .then((value) {
-          // print(value.data['articles'][0]['title']);
           search = value.data['articles'];
           print(search[0]['title']);
           emit(NewsGetSearchSuccessState());
