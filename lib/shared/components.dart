@@ -1,7 +1,9 @@
+// Components file I made to avoid code repetition and make the code more organized and reusable. Moreover it makes it easier to maintain and update the code in the future.
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/modules/details/detail_screen.dart';
 
+// A reusable button widget with customizable properties, used in login screen as login button, profile screens as update and logout buttons
 Widget defaultButton({
   required VoidCallback function,
   bool isDisabled = false,
@@ -29,6 +31,7 @@ Widget defaultButton({
   ),
 );
 
+// A reusable form field widget with customizable properties, used in login, register and profile screens
 Widget defaultFormField({
   required BuildContext context,
   required TextEditingController controller,
@@ -78,12 +81,16 @@ Widget defaultFormField({
   ),
 );
 
+// Function to navigate to a new screen, used in onboarding screen to go to login screen and in article item to go to detail screen
 Future<dynamic> navigateTo(context, widget) =>
     Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 
+// Widget to build each article item in the list, used in articleBuilder function
 Widget buildArticleItem(article, context) => InkWell(
   onTap: () {
+    // Calculate hours ago from publishedAt time and pass it to detail screen to display how many hours ago the article was published
     var hours = hour(articleTime: article['publishedAt']);
+    // Navigate to detail screen with article details when an article item is tapped using navigateTo function from above to avoid code repetition
     navigateTo(
       context,
       DetailScreen(
@@ -120,6 +127,7 @@ Widget buildArticleItem(article, context) => InkWell(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                // Category label for the article, defaulting to 'General' if not available
                 Text(
                   '${article['category'] ?? 'General'}',
                   style: TextStyle(color: Colors.grey),
@@ -127,6 +135,7 @@ Widget buildArticleItem(article, context) => InkWell(
                 SizedBox(height: 10.0),
                 Expanded(
                   child: Text(
+                    // Article title with max 2 lines and ellipsis overflow
                     '${article['title']}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -140,12 +149,14 @@ Widget buildArticleItem(article, context) => InkWell(
                   children: [
                     CircleAvatar(
                       radius: 10.0,
+                      // Placeholder image for article source avatar, can be replaced with actual source logo if available as 'everything' endpoint does not provide source logos
                       backgroundImage: Image(
                         image: AssetImage('assets/images/profile.jpg'),
                       ).image,
                     ),
                     SizedBox(width: 2.0),
                     Expanded(
+                      // Article source name with ellipsis overflow if too long
                       child: Text(
                         '${article['source']['name']}',
                         style: TextStyle(
@@ -156,6 +167,7 @@ Widget buildArticleItem(article, context) => InkWell(
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    // Time icon and hours ago text
                     Icon(
                       Icons.access_time_rounded,
                       size: 14.0,
@@ -163,6 +175,7 @@ Widget buildArticleItem(article, context) => InkWell(
                     ),
                     SizedBox(width: 3.0),
                     Text(
+                      // Calculate hours ago from publishedAt time using hour function below
                       '${hour(articleTime: article['publishedAt'])}h ago',
                       style: TextStyle(color: Colors.black54),
                     ),
@@ -179,24 +192,33 @@ Widget buildArticleItem(article, context) => InkWell(
   ),
 );
 
+// Widget to build the list of articles with a conditional builder to show a loading indicator if the list is empty, used in home, search and category screens
 Widget articleBuilder(list, context, {isSearch = false}) => ConditionalBuilder(
   condition: list.length > 0,
   builder: (context) => ListView.separated(
+    // List of articles with bouncing scroll physics and separator between items
     physics: BouncingScrollPhysics(),
     shrinkWrap: true,
     itemBuilder: (context, index) => buildArticleItem(list[index], context),
     separatorBuilder: (context, index) => SizedBox(height: 1.0),
     itemCount: list.length,
   ),
+  // If the list is empty and it's a search, show nothing, else show a loading indicator
   fallback: (context) => isSearch
       ? Container()
       : Center(child: CircularProgressIndicator(color: Colors.blue)),
 );
 
+// Function to calculate how many hours ago an article was published based on its publishedAt time, used in buildArticleItem to display hours ago
 int hour({required articleTime}) {
+  // Parse the publishedAt time and calculate the difference from current time
+  // Example of publishedAt that return from the API: "2023-10-01T12:34:56Z"
   String publishedAt = articleTime;
+  // Convert the publishedAt string to DateTime object
   DateTime publishedTime = DateTime.parse(publishedAt);
+  // Calculate the difference in hours from current time
   Duration diff = DateTime.now().difference(publishedTime);
+  // Return the difference in hours as an integer
   int hoursAgo = diff.inHours;
   return hoursAgo;
 }

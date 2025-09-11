@@ -1,3 +1,4 @@
+// states for News App
 abstract class NewsStates {}
 
 class NewsInitialState extends NewsStates {}

@@ -1,3 +1,4 @@
+// Layout for the news app using Bloc pattern and BottomNavigationBar for navigation between different screens of the app.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/cubit.dart';
@@ -27,6 +28,7 @@ class NewsLayout extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.currentIndex,
             onTap: (index) {
+              // Change the current index and update the UI
               cubit.changeBottomNavBar(index);
             },
             items: cubit.bottomItems,

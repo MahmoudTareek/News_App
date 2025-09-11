@@ -1,3 +1,4 @@
+// Model for onboarding screens, containing image, title, and body text for each screen and make it easy to change or add new screens.
 class BoardingModel {
   late final String image;
   late final String title;

@@ -1,3 +1,4 @@
+// Home Screen with news categories and articles list with pull-to-refresh functionality
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String selectedCategory = 'all';
+  // List of news categories available for filtering articles selected by user as 'everything' in API don't return categories.
   final List<String> categories = [
     'all',
     'business',
@@ -28,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // Fetch all news articles when the screen is initialized
     WidgetsBinding.instance.addPostFrameCallback((_) {
       NewsCubit.get(context).getAllNews();
     });
@@ -41,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         var cubit = NewsCubit.get(context);
         var list = cubit.allNews;
         if (list.isEmpty) {
+          // Show a friendly message to user if no articles are available
           Fluttertoast.showToast(
             msg: "No Articles Available.",
             toastLength: Toast.LENGTH_SHORT,
@@ -51,11 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 16.0,
           );
         }
+        // Implementing pull-to-refresh functionality using CustomRefreshIndicator package
         return CustomRefreshIndicator(
           onRefresh: () async {
             if (selectedCategory == 'all') {
               cubit.getAllNews();
             } else {
+              // Return to 'all' category on refresh to ensure user sees latest articles across all categories
               selectedCategory = 'all';
               cubit.getAllNews();
             }
@@ -66,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Widget child,
                 IndicatorController controller,
               ) {
+                // Custom animation for the pull-to-refresh indicator
                 return AnimatedBuilder(
                   animation: controller,
                   builder: (BuildContext context, _) {
@@ -89,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                        // Translate the main content down as the user pulls to refresh
                         Transform.translate(
                           offset: Offset(0, 35.0 * controller.value),
                           child: child,
@@ -98,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 );
               },
+          // The main content of the HomeScreen including categories and articles list
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,9 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        "See all",
-                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "See all",
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                        ),
                       ),
                     ],
                   ),
@@ -126,17 +138,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   height: 40,
                   child: ListView.separated(
+                    // Horizontal list of categories for filtering articles
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.only(left: 18.0),
                     itemBuilder: (context, index) {
                       final category = categories[index];
                       final isSelected = category == selectedCategory;
                       return GestureDetector(
+                        // Update selected category and fetch corresponding articles
                         onTap: () {
                           setState(() {
                             selectedCategory = category;
                           });
-
                           if (category == 'all') {
                             cubit.getAllNews();
                           } else {
@@ -148,6 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             horizontal: 5,
                             vertical: 8,
                           ),
+                          // Highlight the selected category
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
@@ -158,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                          // Category name in uppercase
                           child: Center(
                             child: Text(
                               category.toUpperCase(),
@@ -177,6 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
+                // Display the list of articles based on selected category or all articles, using articleBuilder from components.dart to be easily reusable in other screens if I want to show list of articles there too.
                 articleBuilder(list, context),
               ],
             ),

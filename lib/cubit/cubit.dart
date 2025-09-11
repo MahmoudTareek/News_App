@@ -1,6 +1,6 @@
+//Cubit page for managing the state of the app and fetching functions. It uses the Dio package for network requests and Fluttertoast for displaying messages.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:news_app/cubit/states.dart';
 import 'package:news_app/modules/bookmarks/bookmarks_screen.dart';
 import 'package:news_app/modules/home/home_screen.dart';
@@ -15,6 +15,7 @@ class NewsCubit extends Cubit<NewsStates> {
 
   int currentIndex = 0;
 
+  // Bottom Navigation Bar Items and corresponding screens for the app's main navigation
   List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home'),
     BottomNavigationBarItem(
@@ -35,44 +36,38 @@ class NewsCubit extends Cubit<NewsStates> {
     ProfileScreen(),
   ];
 
+  // Function to change the current index of the bottom navigation bar and emit a state change
   void changeBottomNavBar(int index) {
     currentIndex = index;
     emit(NewsBottomNavState());
   }
 
+  // List to store all news articles fetched from the API
   List<dynamic> allNews = [];
-
   void getAllNews() {
     emit(NewsGetAllNewsLoadingState());
     DioHelper.getData(
           url: 'v2/everything',
-          query: {'q': '*', 'apiKey': 'e55351d11831407784ecf1edc1673e7b'},
+          query: {'q': 'news', 'apiKey': '3765e44afd0b407d8ab3d80db9c6c037'},
         )
         .then((value) {
+          print(value.data);
           allNews = value.data['articles'];
           emit(NewsGetAllNewsSuccessState());
         })
         .catchError((error) {
-          Fluttertoast.showToast(
-            msg: "Something went wrong.. Please try again later.",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0,
-          );
+          print(error.toString());
           emit(NewsGetAllNewsErrorState(error.toString()));
         });
   }
 
+  // List to store search results fetched from the API based on user keywords
   List<dynamic> search = [];
-
   void getSearch(String value) {
     emit(NewsGetSearchLoadingState());
     DioHelper.getData(
           url: 'v2/everything',
-          query: {'q': '$value', 'apiKey': 'e55351d11831407784ecf1edc1673e7b'},
+          query: {'q': '$value', 'apiKey': '3765e44afd0b407d8ab3d80db9c6c037'},
         )
         .then((value) {
           search = value.data['articles'];
@@ -80,19 +75,11 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetSearchSuccessState());
         })
         .catchError((error) {
-          Fluttertoast.showToast(
-            msg: "Something went wrong.. Please try again later.",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0,
-          );
           emit(NewsGetSearchErrorState(error.toString()));
         });
   }
 
+  // Function to fetch news articles based on a specific category from the API
   void getNewsByCategory(String category) {
     emit(NewsGetAllNewsLoadingState());
     DioHelper.getData(
@@ -100,7 +87,7 @@ class NewsCubit extends Cubit<NewsStates> {
           query: {
             'category': category,
             'country': 'us',
-            'apiKey': 'e55351d11831407784ecf1edc1673e7b',
+            'apiKey': '3765e44afd0b407d8ab3d80db9c6c037',
           },
         )
         .then((value) {
@@ -108,15 +95,6 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetAllNewsSuccessState());
         })
         .catchError((error) {
-          Fluttertoast.showToast(
-            msg: "Something went wrong.. Please try again later.",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0,
-          );
           emit(NewsGetAllNewsErrorState(error.toString()));
         });
   }
