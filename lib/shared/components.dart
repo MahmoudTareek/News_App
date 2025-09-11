@@ -172,7 +172,7 @@ Widget buildArticleItem(article, context) => InkWell(
                       style: TextStyle(color: Colors.grey),
                     ),
                     Spacer(),
-                    Icon(Icons.bookmark, size: 20.0, color: Colors.grey),
+                    Icon(Icons.more_horiz, size: 20.0, color: Colors.grey),
                   ],
                 ),
               ],
