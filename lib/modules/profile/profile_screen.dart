@@ -24,9 +24,9 @@ class ProfileScreen extends StatelessWidget {
                   Center(
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(
-                        'https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg',
-                      ),
+                      backgroundImage: Image(
+                        image: AssetImage('assets/images/profile.jpg'),
+                      ).image,
                     ),
                   ),
                   SizedBox(height: 30),
@@ -67,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                       Expanded(
                         child: defaultButton(
                           function: () {},
-                          text: 'update',
+                          text: 'Update',
                           background: Colors.blue,
                           radius: 50.0,
                         ),

@@ -93,97 +93,94 @@ Widget myDivider() => Padding(
 Future<dynamic> navigateTo(context, widget) =>
     Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 
-Widget buildArticleItem(article, context) => Material(
-  color: Colors.white,
-  child: InkWell(
-    onTap: () {
-      var hours = hour(articleTime: article['publishedAt']);
-      navigateTo(
-        context,
-        DetailScreen(
-          articleImageURL:
-              article['urlToImage'] ?? 'https://via.placeholder.com/150',
-          articleTitle: article['title'] ?? 'No Title',
-          articleContent: article['content'] ?? 'No Content',
-          articleSource: article['source']['name'] ?? 'Unknown Source',
-          articlePublishedTime: hours.toString(),
-          articleURL: article['url'] ?? '',
-        ),
-      );
-    },
-    child: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        children: [
-          Container(
-            width: 120.0,
-            height: 120.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: NetworkImage('${article['urlToImage']}'),
-                fit: BoxFit.cover,
-              ),
+Widget buildArticleItem(article, context) => InkWell(
+  onTap: () {
+    var hours = hour(articleTime: article['publishedAt']);
+    navigateTo(
+      context,
+      DetailScreen(
+        articleImageURL:
+            article['urlToImage'] ?? 'https://via.placeholder.com/150',
+        articleTitle: article['title'] ?? 'No Title',
+        articleContent: article['content'] ?? 'No Content',
+        articleSource: article['source']['name'] ?? 'Unknown Source',
+        articlePublishedTime: hours.toString(),
+        articleURL: article['url'] ?? '',
+      ),
+    );
+  },
+  child: Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Row(
+      children: [
+        Container(
+          width: 120.0,
+          height: 120.0,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: NetworkImage('${article['urlToImage']}'),
+              fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: Container(
-              height: 120.0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    '${article['category'] ?? 'General'}',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(height: 5.0),
-                  Expanded(
-                    child: Text(
-                      '${article['title']}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+        ),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: Container(
+            height: 120.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  '${article['category'] ?? 'General'}',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                SizedBox(height: 5.0),
+                Expanded(
+                  child: Text(
+                    '${article['title']}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '${article['source']['name']}',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${article['source']['name']}',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(width: 5.0),
-                      Icon(
-                        Icons.access_time_rounded,
-                        size: 14.0,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(width: 3.0),
-                      Text(
-                        '${hour(articleTime: article['publishedAt'])}h ago',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      Spacer(),
-                      Icon(Icons.bookmark, size: 20.0, color: Colors.grey),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    SizedBox(width: 5.0),
+                    Icon(
+                      Icons.access_time_rounded,
+                      size: 14.0,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(width: 3.0),
+                    Text(
+                      '${hour(articleTime: article['publishedAt'])}h ago',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Spacer(),
+                    Icon(Icons.bookmark, size: 20.0, color: Colors.grey),
+                  ],
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   ),
 );
