@@ -141,4 +141,24 @@ class NewsCubit extends Cubit<NewsStates> {
           emit(NewsGetSearchErrorState(error.toString()));
         });
   }
+
+  void getNewsByCategory(String category) {
+    emit(NewsGetAllNewsLoadingState());
+    DioHelper.getData(
+          url: 'v2/top-headlines',
+          query: {
+            'category': category,
+            'country': 'us',
+            'apiKey': 'e55351d11831407784ecf1edc1673e7b',
+          },
+        )
+        .then((value) {
+          allNews = value.data['articles'];
+          emit(NewsGetAllNewsSuccessState());
+        })
+        .catchError((error) {
+          print(error.toString());
+          emit(NewsGetAllNewsErrorState(error.toString()));
+        });
+  }
 }

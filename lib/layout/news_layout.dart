@@ -17,7 +17,15 @@ class NewsLayout extends StatelessWidget {
       builder: (context, state) {
         var cubit = NewsCubit.get(context);
         return Scaffold(
-          // appBar: AppBar(title: Text('News App')),
+          appBar: AppBar(
+            title: Text('News App'),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.notifications_outlined),
+                onPressed: () {},
+              ),
+            ],
+          ),
           body: cubit.screen[cubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.currentIndex,

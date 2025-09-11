@@ -95,7 +95,6 @@ Future<dynamic> navigateTo(context, widget) =>
 
 Widget buildArticleItem(article, context) => InkWell(
   onTap: () {
-    // navigateTo(context, WebViewScreen(article['url']));
     var hours = hour(articleTime: article['publishedAt']);
     navigateTo(
       context,
@@ -190,9 +189,10 @@ Widget articleBuilder(list, context, {isSearch = false}) => ConditionalBuilder(
   condition: list.length > 0,
   builder: (context) => ListView.separated(
     physics: BouncingScrollPhysics(),
+    shrinkWrap: true,
     itemBuilder: (context, index) => buildArticleItem(list[index], context),
-    separatorBuilder: (context, index) => Container(),
-    itemCount: 30,
+    separatorBuilder: (context, index) => SizedBox(height: 1.0),
+    itemCount: list.length,
   ),
   fallback: (context) =>
       isSearch ? Container() : Center(child: CircularProgressIndicator()),

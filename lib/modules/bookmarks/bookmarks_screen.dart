@@ -5,9 +5,6 @@ class BookmarksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Bookmarks')),
-      body: const Center(child: Text('Bookmarks Screen')),
-    );
+    return Scaffold(body: const Center(child: Text('Bookmarks Screen')));
   }
 }

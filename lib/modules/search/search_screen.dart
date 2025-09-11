@@ -13,7 +13,6 @@ class SearchScreen extends StatelessWidget {
       builder: (context, state) {
         var list = NewsCubit.get(context).search;
         return Scaffold(
-          appBar: AppBar(title: Text('Search')),
           body: Column(
             children: [
               Padding(
