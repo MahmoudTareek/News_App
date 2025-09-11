@@ -67,7 +67,7 @@ Widget defaultFormField({
     ),
     labelText: label,
     prefixIcon: prefix != null ? Icon(prefix) : null,
-    suffix: suffix != null
+    suffixIcon: suffix != null
         ? IconButton(
             onPressed: () {
               isPassword = !isPassword;
