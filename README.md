@@ -34,19 +34,19 @@ Developed a News Application with a clean architecture using BLoC and News API.
 
 Download or clone this repo by using the link below:
 
-```https://github.com/MahmoudTareek/News_App.git```
+`https://github.com/MahmoudTareek/News_App.git`
 
 ### Step 2:
 
 Go to project root and execute the following command in console to get the required dependencies:
 
-  flutter pub get 
+  `flutter pub get` 
 
 ### Step 3:
 
 Run the following command in console:
 
-  flutter run
+  `flutter run`
 
     
 
