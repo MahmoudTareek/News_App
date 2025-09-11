@@ -17,6 +17,8 @@ Developed a News Application with a clean architecture using BLoC and News API.
   Categories Filter.
   
   List of News according to the category.
+  
+- Detail screen that contains article's title, image, description, published date, and a button to navigate to the real full article.
 
 - Explore screen that contains searching for articales by keywords
   
@@ -24,7 +26,6 @@ Developed a News Application with a clean architecture using BLoC and News API.
 
 - Profile screen that contains user's information to be updated and logout button.
 
-- Detail screen that contains article's title, image, description, published date, and a button to navigate to real full article.
   
     
 
@@ -48,5 +49,8 @@ Developed a News Application with a clean architecture using BLoC and News API.
   <img src="assets/Screenshots/7.jpeg" width="250"/>
   <img src="assets/Screenshots/8.jpeg" width="250"/>
   <img src="assets/Screenshots/9.jpeg" width="250"/>
-</p3
-3
+</p>
+
+<p>
+  <img src="assets/Screenshots/10.jpeg" width="250"/>
+</p>
