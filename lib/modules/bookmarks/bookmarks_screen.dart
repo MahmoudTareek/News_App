@@ -5,6 +5,13 @@ class BookmarksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: const Center(child: Text('Bookmarks Screen')));
+    return Scaffold(
+      body: const Center(
+        child: Text(
+          'Bookmarks Screen',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
   }
 }

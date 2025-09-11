@@ -2,6 +2,7 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/cubit.dart';
 import 'package:news_app/cubit/states.dart';
+import 'package:news_app/layout/news_layout.dart';
 import 'package:news_app/modules/home/home_screen.dart';
 import 'package:news_app/shared/components.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   function: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => NewsLayout()),
                     );
                   },
                   text: 'Login',
