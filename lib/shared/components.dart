@@ -150,7 +150,7 @@ Widget buildArticleItem(article, context) => InkWell(
                 Row(
                   children: [
                     CircleAvatar(
-                      radius: 8.0,
+                      radius: 10.0,
                       backgroundImage: Image(
                         image: AssetImage('assets/images/profile.jpg'),
                       ).image,
