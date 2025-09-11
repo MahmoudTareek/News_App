@@ -36,12 +36,6 @@ class NewsCubit extends Cubit<NewsStates> {
 
   void changeBottomNavBar(int index) {
     currentIndex = index;
-
-    // if(index == 1)
-    //   getSports();
-    // if(index == 2)
-    //   getScience();
-
     emit(NewsBottomNavState());
   }
 
@@ -55,9 +49,6 @@ class NewsCubit extends Cubit<NewsStates> {
         )
         .then((value) {
           allNews = value.data['articles'];
-          for (var article in allNews) {
-            print(article['category']);
-          }
           emit(NewsGetAllNewsSuccessState());
         })
         .catchError((error) {
@@ -66,67 +57,10 @@ class NewsCubit extends Cubit<NewsStates> {
         });
   }
 
-  List<dynamic> sports = [];
-
-  void getSports() {
-    emit(NewsGetSportsLoadingState());
-
-    if (sports.length == 0) {
-      DioHelper.getData(
-            url: 'v2/top-headlines',
-            query: {
-              'category': 'sports',
-              'apiKey': 'e55351d11831407784ecf1edc1673e7b',
-            },
-          )
-          .then((value) {
-            // print(value.data['articles'][0]['title']);
-            sports = value.data['articles'];
-            print(sports[0]['title']);
-            emit(NewsGetSportsSuccessState());
-          })
-          .catchError((error) {
-            print(error.toString());
-            emit(NewsGetSportsErrorState(error.toString()));
-          });
-    } else {
-      emit(NewsGetSportsSuccessState());
-    }
-  }
-
-  List<dynamic> science = [];
-
-  void getScience() {
-    emit(NewsGetScienceLoadingState());
-
-    if (science.length == 0) {
-      DioHelper.getData(
-            url: 'v2/top-headlines',
-            query: {
-              'category': 'science',
-              'apiKey': 'e55351d11831407784ecf1edc1673e7b',
-            },
-          )
-          .then((value) {
-            // print(value.data['articles'][0]['title']);
-            science = value.data['articles'];
-            print(science[0]['title']);
-            emit(NewsGetScienceSuccessState());
-          })
-          .catchError((error) {
-            print(error.toString());
-            emit(NewsGetScienceErrorState(error.toString()));
-          });
-    } else {
-      emit(NewsGetScienceSuccessState());
-    }
-  }
-
   List<dynamic> search = [];
 
   void getSearch(String value) {
     emit(NewsGetSearchLoadingState());
-
     DioHelper.getData(
           url: 'v2/everything',
           query: {'q': '$value', 'apiKey': 'e55351d11831407784ecf1edc1673e7b'},
