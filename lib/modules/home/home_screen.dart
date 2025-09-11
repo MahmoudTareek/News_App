@@ -88,14 +88,23 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 25.0),
-                  child: Text(
-                    "Latest",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                  padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Latest",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "See all",
+                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 10),
@@ -103,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 40,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 18.0),
                     itemBuilder: (context, index) {
                       final category = categories[index];
                       final isSelected = category == selectedCategory;
@@ -121,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 16,
+                            horizontal: 5,
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(

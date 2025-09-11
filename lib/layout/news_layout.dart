@@ -20,9 +20,12 @@ class NewsLayout extends StatelessWidget {
           appBar: AppBar(
             title: Text('News App'),
             actions: [
-              IconButton(
-                icon: Icon(Icons.notifications_outlined),
-                onPressed: () {},
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: IconButton(
+                  icon: Icon(Icons.notifications_outlined),
+                  onPressed: () {},
+                ),
               ),
             ],
           ),
