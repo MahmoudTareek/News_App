@@ -53,18 +53,20 @@ class DetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              '${articleContent}',
+              '${articleContent}'.replaceAll(RegExp(r'\[\+\d+ chars\]'), ''),
               style: TextStyle(fontSize: 16),
-              maxLines: 15,
-            ),
-            defaultButton(
-              function: () {
-                navigateTo(context, WebViewScreen(articleURL));
-              },
-              text: 'Open Article',
-              radius: 10.0,
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: defaultButton(
+          function: () {
+            navigateTo(context, WebViewScreen(articleURL));
+          },
+          text: 'Open Article',
+          radius: 10.0,
         ),
       ),
     );

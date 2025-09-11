@@ -39,6 +39,7 @@ dependencies:
   dio: ^5.9.0
   conditional_builder_null_safety: ^0.0.6
   webview_flutter: ^4.13.0
+  custom_refresh_indicator: ^4.0.1
 
 dev_dependencies:
   flutter_test:
