@@ -48,7 +48,14 @@ Run the following command in console:
 
   `flutter run`
 
-    
+## API Key Setup
+
+1. Sign up at [NewsAPI](https://newsapi.org/) and get your API Key.
+2. Copy the file `.env.example` in the assets and rename it to `.env`.
+3. Open `.env` and add your API Key:
+
+```env
+API_KEY=YOUR_API_KEY_HERE
 
 ## Screenshots
   
