@@ -26,8 +26,6 @@ Developed a News Application with a clean architecture using BLoC and News API.
 
 - Profile screen that contains user's information to be updated and logout button.
 
-- Simple UI screens.
-- 
 ## How to Use
 
 ### Step 1:
@@ -59,7 +57,7 @@ flutter run
 2. Open the file `.env.example` in the assets and rename it to `.env`.
 3. Open `.env` and add your API Key:
 
-API_KEY=YOUR_API_KEY_HERE
+  API_KEY=PUT_YOUR_API_KEY_HERE
 
 ## Screenshots
   
