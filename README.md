@@ -46,7 +46,9 @@ Go to project root and execute the following command in console to get the requi
 
 Run the following command in console:
 
-  `flutter run`
+  ```env
+flutter run```env
+
 
 ## API Key Setup
 
@@ -54,7 +56,6 @@ Run the following command in console:
 2. Copy the file `.env.example` in the assets and rename it to `.env`.
 3. Open `.env` and add your API Key:
 
-```env
 API_KEY=YOUR_API_KEY_HERE
 
 ## Screenshots
