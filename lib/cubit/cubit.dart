@@ -1,12 +1,15 @@
 //Cubit page for managing the state of the app and fetching functions. It uses the Dio package for network requests and Fluttertoast for displaying messages.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:news_app/cubit/states.dart';
 import 'package:news_app/modules/bookmarks/bookmarks_screen.dart';
 import 'package:news_app/modules/home/home_screen.dart';
 import 'package:news_app/modules/profile/profile_screen.dart';
 import 'package:news_app/modules/search/search_screen.dart';
 import 'package:news_app/shared/network/dio_helper.dart';
+
+final String apiKey = dotenv.env['API_KEY'] ?? '';
 
 class NewsCubit extends Cubit<NewsStates> {
   NewsCubit() : super(NewsInitialState());
@@ -48,7 +51,7 @@ class NewsCubit extends Cubit<NewsStates> {
     emit(NewsGetAllNewsLoadingState());
     DioHelper.getData(
           url: 'v2/everything',
-          query: {'q': 'news', 'apiKey': '3765e44afd0b407d8ab3d80db9c6c037'},
+          query: {'q': 'news', 'apiKey': apiKey},
         )
         .then((value) {
           print(value.data);
@@ -67,7 +70,7 @@ class NewsCubit extends Cubit<NewsStates> {
     emit(NewsGetSearchLoadingState());
     DioHelper.getData(
           url: 'v2/everything',
-          query: {'q': '$value', 'apiKey': '3765e44afd0b407d8ab3d80db9c6c037'},
+          query: {'q': '$value', 'apiKey': apiKey},
         )
         .then((value) {
           search = value.data['articles'];
@@ -84,11 +87,7 @@ class NewsCubit extends Cubit<NewsStates> {
     emit(NewsGetAllNewsLoadingState());
     DioHelper.getData(
           url: 'v2/top-headlines',
-          query: {
-            'category': category,
-            'country': 'us',
-            'apiKey': '3765e44afd0b407d8ab3d80db9c6c037',
-          },
+          query: {'category': category, 'country': 'us', 'apiKey': apiKey},
         )
         .then((value) {
           allNews = value.data['articles'];
