@@ -26,7 +26,28 @@ Developed a News Application with a clean architecture using BLoC and News API.
 
 - Profile screen that contains user's information to be updated and logout button.
 
-  
+- Simple UI screens.
+- 
+## How to Use
+
+### Step 1:
+
+Download or clone this repo by using the link below:
+
+`https://github.com/MahmoudTareek/News_App.git`
+
+### Step 2:
+
+Go to project root and execute the following command in console to get the required dependencies:
+
+  `flutter pub get` 
+
+### Step 3:
+
+Run the following command in console:
+
+  `flutter run`
+
     
 
 ## Screenshots
