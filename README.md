@@ -47,7 +47,7 @@ Go to project root and execute the following command in console to get the requi
 Run the following command in console:
 
   ```env
-flutter run```env
+flutter run
 
 
 ## API Key Setup
